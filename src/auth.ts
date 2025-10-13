@@ -6,7 +6,9 @@ import type { User } from "next-auth";
 
 export const {
   handlers: { GET, POST },
-  auth, signIn, signOut,
+  auth,
+  signIn,
+  signOut,
 } = NextAuth({
   providers: [
     CredentialsProvider({
@@ -33,22 +35,26 @@ export const {
         return { id: user.id, email: user.email, role: user.role } as User;
       },
     }),
-  ], 
-    session: { strategy: "jwt" },
-    callbacks: {
-        async jwt({ token, user }) {
-            if (user) {
-                token.role = user.role;
-                token.sub = user.id;
-            }
-            return token;
+  ],
+  session: { strategy: "jwt" },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+        token.name = user.name;
+        token.email = user.email;
+      }
+      return token;
     },
     async session({ session, token }) {
-        if (session?.user && token) {
-            session.user.id = token.sub as string;
-            session.user.role = token.role;
-        }
-        return session;
-    }
-}
-})
+      if (session?.user && token) {
+        session.user.id = token.id as string;
+        session.user.role = token.role 
+        session.user.name = token.name as string;
+        session.user.email = token.email as string;
+      }
+      return session;
+    },
+  },
+});

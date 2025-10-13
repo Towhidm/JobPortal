@@ -31,6 +31,7 @@ type CreateSignUPFormState = {
     formerror?: string[];
   };
 };
+console.log();
 const SignUpActions = async (
   prevState: CreateSignUPFormState,
   formdata: FormData
@@ -47,6 +48,7 @@ const SignUpActions = async (
     };
   }
   try {
+    console.log("Starting user creation...");
     const hashedPassword = await bcrypt.hash(result.data.password, 10);
     await prisma.user.create({
       data: {
@@ -56,6 +58,7 @@ const SignUpActions = async (
         role: result.data.role,
       },
     });
+    console.log("User created:");
   } catch (err) {
     if (err instanceof Error) {
       return {
