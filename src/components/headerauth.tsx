@@ -25,14 +25,14 @@ const HeadAuth = () => {
     return (
       <>
         <Link href="./login">
-          <Button className="bg-[#2ecc71] cursor-pointer hover:bg-[#27ae60]">
+          <Button className="bg-emerald-500 cursor-pointer hover:bg-emerald-600">
             <MdLogin className="text-2xl" />
             Login
           </Button>
         </Link>
 
         <Link href="./signup">
-          <Button className="bg-[#2ecc71] cursor-pointer hover:bg-[#27ae60]">
+          <Button className="bg-emerald-500 cursor-pointer hover:bg-emerald-600">
             <SiGnuprivacyguard className="text-2xl" />
             SignUp
           </Button>
@@ -41,9 +41,9 @@ const HeadAuth = () => {
     );
   }
 
-//   // Ensure role exists
+  //   // Ensure role exists
 
- const role = session.user.role as Role | undefined;
+  const role = session.user.role as Role | undefined;
 
   const handleLogout = async () => {
     await signOut({ redirect: false });
@@ -54,16 +54,17 @@ const HeadAuth = () => {
     <>
       <HiBellAlert />
       <Button
-        className="bg-[#2ecc71] cursor-pointer hover:bg-[#27ae60]"
+        className="bg-emerald-500 cursor-pointer hover:bg-emerald-600"
         type="button"
         onClick={handleLogout}
-      ><FaSignOutAlt className="text-2xl" />
+      >
+        <FaSignOutAlt className="text-2xl" />
         Signout
       </Button>
 
       {role && (
         <Link href={`/dashboard/${role.toLowerCase()}`}>
-          <Button className="bg-[#2ecc71] cursor-pointer hover:bg-[#27ae60]">
+          <Button className="bg-emerald-500 cursor-pointer hover:bg-emerald-600">
             <CgProfile className="text-2xl" />
             Profile
           </Button>
@@ -71,7 +72,6 @@ const HeadAuth = () => {
       )}
     </>
   );
-}
-
+};
 
 export default HeadAuth;

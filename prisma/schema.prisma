@@ -1,19 +1,17 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
-// datasource db {
-//   provider = "postgresql"
-//   url      = env("DATABASE_URL")
-//   directUrl = env("DATABASE_DIRECT_URL")
-// }
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
+// datasource db {
+//   provider = "sqlite"
+//   url      = env("DATABASE_URL")
+// }
+
 // Enums
 
 enum Role {
@@ -72,22 +70,50 @@ model User {
   accounts Account[]
   sessions Session[]
 
-  jobs      Job[] // Employer posts
-  applied   Application[] // Jobseeker applications
-  bookmarks Bookmark[]
-  jobAlerts JobAlert[]
+  jobs               Job[] // Employer posts
+  applied            Application[] // Jobseeker applications
+  bookmarks          Bookmark[]
+  jobAlerts          JobAlert[]
+  verified           Boolean       @default(false)
+  verificationCode   String?
+  verificationExpiry DateTime?
+
+  companyname     String?
+  companytagline  String?
+  companysite     String?
+  companylocation String?
+  companyemail    String?
+  aboutcompany    String?
+  contactnumber   String?
+  activeworker    String?
+  industry        String?
+  founded         String?
+  requirments     String?
 }
 
 model Job {
-  id           String        @id @default(cuid())
-  title        String
-  description  String
+  id             String    @id @default(cuid())
+  title          String
+  companyTagline String?
+  description    String
+  category       String
+  level          String
+  vacancies      Int
+  jobType        String
+  location       String
+  salary         String
+  applyBefore    DateTime?
+  otherSkills    String?
+  requirments   String?
+  about          String?
+
   status       JobStatus
   createdById  String
   createdBy    User          @relation(fields: [createdById], references: [id])
   applications Application[]
   bookmarks    Bookmark[]
   jobAlerts    JobAlert[]
+  // companyLogo  String?       
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt

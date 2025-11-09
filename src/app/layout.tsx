@@ -4,6 +4,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import HeaderPage from "@/components/HeaderPage";
 import AuthSessionProvider from "@/components/SessionProvider";
+import { Toaster } from "sonner";
+import Footer from "@/components/Footer";
 
 
 
@@ -30,13 +32,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`min-h-screen flex flex-col ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthSessionProvider>
           <HeaderPage />
-          {children}
+          <main className="flex-1">
+            {children}
+          </main>
         </AuthSessionProvider>
-        
+        <Footer />
+        <Toaster position="top-right" />
       </body>
     </html>
   );

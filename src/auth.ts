@@ -3,13 +3,13 @@ import { prisma } from "./lib";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import type { User } from "next-auth";
-
 export const {
-  handlers: { GET, POST },
+  handlers, 
   auth,
   signIn,
   signOut,
 } = NextAuth({
+ 
   providers: [
     CredentialsProvider({
       id: "credentials",
@@ -18,11 +18,13 @@ export const {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
+      
       async authorize(credentials): Promise<User | null> {
         if (!credentials?.email || !credentials?.password) return null;
+        
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email as string },
+          where: { email: credentials.email as string,verified: true },
         });
         if (!user) return null;
 
@@ -32,10 +34,13 @@ export const {
         );
         if (!isValid) return null;
 
-        return { id: user.id, email: user.email, role: user.role } as User;
+        return { id: user.id, email: user.email, role: user.role,name: user.name } as User;
       },
     }),
   ],
+  pages: {
+    signIn: "/login",
+  },
   session: { strategy: "jwt" },
   callbacks: {
     async jwt({ token, user }) {
@@ -58,3 +63,5 @@ export const {
     },
   },
 });
+
+
