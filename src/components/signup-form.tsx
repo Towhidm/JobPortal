@@ -17,10 +17,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import SignUpActions from "@/actions/signupform";
-import { useActionState } from "react";
+import { useActionState,useTransition  } from "react";
+import LoadingOverlay from "@/components/LoadingOverlay";
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const [formstate, actions] = useActionState(SignUpActions, { errors: {} });
+  const [isPending, startTransition] = useTransition();
+   function handleSubmit(formData: FormData) {
+    startTransition(() => {
+      actions(formData);
+    });
+  }
+  
   return (
     <Card {...props}>
       <CardHeader>
@@ -30,7 +38,14 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form action={actions}>
+        <<form
+  onSubmit={(e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    handleSubmit(formData);
+  }}
+>
+>
           <FieldGroup>
             <Field>
               <FieldLabel htmlFor="name">Full Name</FieldLabel>
