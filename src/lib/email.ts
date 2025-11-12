@@ -51,7 +51,7 @@ export async function sendVerificationEmail(to: string, code: string,name:string
            <h2>${name},Welcome to Our App 🎉</h2>
           <p>Your verification code is:</p>
            <h3>${code}</h3>
-          <p>This code expires in 10 minutes.</p>
+          <p>This code expires in 20 minutes.</p>
       </div>
      `,
     });
