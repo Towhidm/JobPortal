@@ -9,7 +9,7 @@ export default function Footer() {
         
         {/* Brand */}
         <div>
-          <h2 className="text-2xl font-bold">JobHunt</h2>
+          <h2 className="text-2xl font-bold">JobPortal</h2>
           <p className="mt-3 text-sm text-gray-300">
             Find your dream job or hire top talent. Connecting opportunities with skills.
           </p>
@@ -56,7 +56,7 @@ export default function Footer() {
 
       {/* Bottom */}
       <div className="border-t border-gray-700 py-4 text-xs text-center text-gray-400">
-        © {new Date().getFullYear()} JobHunt — All Rights Reserved.
+        © {new Date().getFullYear()} JobPortal — All Rights Reserved.
       </div>
     </footer>
   );
