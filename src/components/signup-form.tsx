@@ -31,6 +31,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   
   return (
     <Card {...props}>
+      {isPending && <LoadingOverlay />}
       <CardHeader>
         <CardTitle>Create an account</CardTitle>
         <CardDescription>
