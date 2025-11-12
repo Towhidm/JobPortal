@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import PostJob from "@/actions/creatjob";
 import { useSession } from "next-auth/react";
+import LoadingOverlay from "@/components/LoadingOverlay"; 
 
 export default function PostJobs() {
   const router = useRouter();
@@ -39,6 +40,7 @@ export default function PostJobs() {
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded shadow-md">
+      {loading && <LoadingOverlay />}
       <h2 className="text-2xl font-bold mb-4">Post a Job</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
