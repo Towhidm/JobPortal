@@ -145,7 +145,7 @@ export default function PostJobs() {
         </Select>
         <button
           type="submit"
-          className="w-full p-2 bg-[#2ecc71] text-white rounded hover:bg-[#1ea556] cursor-pointer"
+          className="w-full p-2 text-white rounded bg-emerald-500 cursor-pointer hover:bg-emerald-600"
         >
           {" "}
           {loading ? "Posting..." : "Post Job"}
