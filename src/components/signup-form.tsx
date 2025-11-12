@@ -38,13 +38,12 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <<form
+        <form
   onSubmit={(e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     handleSubmit(formData);
   }}
->
 >
           <FieldGroup>
             <Field>
