@@ -60,7 +60,7 @@ export default function HeaderPage() {
             className="hover:text-[#2ecc71] transition-colors duration-300 flex items-center gap-1"
           >
             <FaClipboardList />
-            JobBorad
+            JobBoard
           </Link>
           {role === "EMPLOYER" && (
           
@@ -117,7 +117,7 @@ export default function HeaderPage() {
           className="text-base sm:text-lg hover:text-[#2ecc71] transition-colors flex items-center gap-1"
         >
           <FaClipboardList />
-          JobBorad
+          JobBoard
         </Link>
         {role === "EMPLOYER" &&(
         
