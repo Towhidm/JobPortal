@@ -116,15 +116,18 @@ import { Input } from "@/components/ui/input";
 import React from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import LoadingOverlay from "@/components/LoadingOverlay";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+      const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setLoading(true);
     console.log("running handleSubmit");
     const form = new FormData(e.currentTarget);
     const email = form.get("email") as string;
@@ -139,6 +142,7 @@ export function LoginForm({
 
     if (res?.error) {
       setError("Invalid email or password");
+          setLoading(false);
     } else if (res?.ok) {
       const session = await fetch("/api/auth/session").then((r) => r.json());
 
@@ -151,6 +155,7 @@ export function LoginForm({
   }
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
+          {loading && <LoadingOverlay />}
       <Card>
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
