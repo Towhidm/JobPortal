@@ -11,7 +11,7 @@ export default function Loading() {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeInOut", repeat: Infinity, repeatType: "mirror" }}
       >
-        <div className="absolute w-30 h-30 rounded-full border-4 border-t-transparent border-blue-500 animate-spin"></div>
+        <div className="absolute w-35 h-35 rounded-full border-4 border-t-transparent border-blue-500 animate-spin"></div>
         <motion.span
           className="text-blue-600 text-xl font-semibold"
           animate={{ opacity: [0.6, 1, 0.6] }}
