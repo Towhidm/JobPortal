@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "./ui/button";
-import { useSession, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Role } from "@prisma/client";
@@ -10,10 +10,16 @@ import { MdLogin } from "react-icons/md";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { FaSignOutAlt } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
+import type { Session } from "next-auth";
 
-const HeadAuth = () => {
+
+interface HeadAuthProps {
+  session:Session | null;
+  status: "loading" | "authenticated" | "unauthenticated";
+}
+
+const HeadAuth = ({session,status}:HeadAuthProps) => {
   const router = useRouter();
-  const { data: session, status } = useSession();
 
   if (status === "loading") {
     return (

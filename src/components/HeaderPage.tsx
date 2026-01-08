@@ -33,7 +33,7 @@ import { FaClipboardList } from "react-icons/fa";
 export default function HeaderPage() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen((prev) => !prev);
-  const { data: session } = useSession();
+  const { data: session ,status} = useSession();
   const role = session?.user?.role;
 
   return (
@@ -85,7 +85,7 @@ export default function HeaderPage() {
 
         {/* ✅ Desktop Auth Buttons */}
         <div className="hidden md:flex gap-3 items-center">
-          <HeadAuth />
+          <HeadAuth session={session} status={status} />
         </div>
 
         {/* ✅ Mobile Hamburger */}
@@ -141,7 +141,8 @@ export default function HeaderPage() {
         )}
         {/* ✅ Auth buttons in mobile view */}
         <div className="flex flex-col items-center gap-3 w-full px-4">
-          <HeadAuth />
+          
+          <HeadAuth session={session} status={status} />
         </div>
       </div>
     </nav>

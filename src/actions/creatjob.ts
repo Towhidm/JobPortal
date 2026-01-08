@@ -2,10 +2,12 @@
 import { prisma } from "@/lib";
 import { JobStatus } from "@prisma/client";
 import { auth } from "@/auth";
+import { revalidatePath } from "next/cache";
 
 const PostJob = async (form: FormData) => {
   const session = await auth();
   if (!session || !session.user?.id ) {
+    revalidatePath("/");
     return { success: false };
   }
 
@@ -44,6 +46,7 @@ const PostJob = async (form: FormData) => {
     about: about || null,
   },
   });
+  revalidatePath("/");
 
   return { success: true };
 };

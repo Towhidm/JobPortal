@@ -15,7 +15,7 @@ export default async function ApplicantsPage({
     redirect("/login");
   }
 
-  const jobId = params.id;
+const { id: jobId } = await params as { id: string };
 
   // Fetch applicants with user info
   const applicants = await prisma.application.findMany({
